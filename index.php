@@ -71,8 +71,13 @@ if (isset($_POST['delete'])) {
           <td><?php echo $row['user_name'];?></td>
           <td><?php echo $row['address'];?></td>
           <td>
-          <a href="#" class="btn btn-primary btn-sm">Edit</a>
         <!-- Delete button -->
+        <form method="POST" style="display: inline;" action="update.php">
+            <input type="hidden" name="id" value="<?php echo $row['user_id']; ?>">
+            <button type="submit" value="Update" name="delete" class="btn btn-primary btn-sm" onclick="return confirm('Do you want edit this profile?')">
+            <i class="fas fa-edit"></i>
+            </button>
+        </form>
         <form method="POST" style="display: inline;">
             <input type="hidden" name="id" value="<?php echo $row['user_id']; ?>">
             <button type="submit" value="Delete" name="delete" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this user?')">
@@ -109,6 +114,11 @@ document.addEventListener('DOMContentLoaded', function() {
       case 'success':
         title = 'Success!';
         text = 'Record is successfully deleted.';
+        icon = 'success';
+        break;
+        case 'success1':
+        title = 'Success!';
+        text = 'Record is successfully updated.';
         icon = 'success';
         break;
       case 'error':
