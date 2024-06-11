@@ -3,6 +3,11 @@ require_once('classes/database.php');
 $con = new database();
 session_start();
 
+if (empty($_SESSION['username']) || $_SESSION['account_type'] !=0) {
+  header('location:login.php');
+  exit();
+}
+
 if (isset($_POST['delete'])) {
     $id = $_POST['id'];
     if ($con->delete($id)) {
@@ -121,7 +126,16 @@ document.addEventListener('DOMContentLoaded', function() {
         text = 'Record is successfully updated.';
         icon = 'success';
         break;
-      case 'error':
+        case 'success3':
+        title = 'You are successfully logged in.'
+        icon= 'success'
+        case 'error':
+        break; 
+        case 'success4':
+        title = 'You successfully changed your password.'
+        icon= 'success'
+        case 'error':
+        break;
         title = 'Error!';
         text = 'Something went wrong.';
         icon = 'error';
